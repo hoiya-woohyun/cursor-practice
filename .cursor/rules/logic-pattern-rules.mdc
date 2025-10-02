@@ -1,0 +1,111 @@
+---
+description: "로직 패턴 규칙 - if-else 문과 for loop 사용, filter 메서드 금지"
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+alwaysApply: true
+---
+
+# 🔄 로직 패턴 규칙
+
+## 🎯 Verify 브랜치의 로직 패턴 규칙
+
+이 브랜치에서는 **기본적인 조건문과 반복문 패턴**에 중점을 둡니다.
+
+### ✅ 올바른 로직 패턴
+
+#### 1. if-else 문 사용
+
+```javascript
+// ✅ 올바른 예시
+const evenNumbersList = [];
+for (let i = 0; i < numbers.length; i++) {
+  if (numbers[i] % 2 === 0) {
+    evenNumbersList.push(numbers[i]);
+  } else {
+    // 홀수는 건너뛰기
+  }
+}
+```
+
+#### 2. for loop 사용
+
+```javascript
+// ✅ 올바른 예시
+const validUsersList = [];
+for (let i = 0; i < users.length; i++) {
+  if (users[i].isActive) {
+    validUsersList.push(users[i]);
+  }
+}
+```
+
+#### 3. 기본적인 조건문 패턴
+
+```javascript
+// ✅ 올바른 예시
+const primeNumbersList = [];
+for (let i = 0; i < numbers.length; i++) {
+  let isPrime = true;
+  for (let j = 2; j < numbers[i]; j++) {
+    if (numbers[i] % j === 0) {
+      isPrime = false;
+      break;
+    }
+  }
+  if (isPrime) {
+    primeNumbersList.push(numbers[i]);
+  }
+}
+```
+
+### ❌ 금지된 로직 패턴
+
+#### 1. filter 메서드 사용 금지
+
+```javascript
+// ❌ 잘못된 예시 - filter 메서드 사용
+const evenNumbersList = numbers.filter((num) => num % 2 === 0);
+```
+
+#### 2. map, reduce 등 고차 함수 사용 금지
+
+```javascript
+// ❌ 잘못된 예시
+const evenNumbersList = numbers
+  .map((num) => num * 2)
+  .filter((num) => num % 2 === 0);
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+```
+
+#### 3. forEach 메서드 사용 금지
+
+```javascript
+// ❌ 잘못된 예시
+const evenNumbersList = [];
+numbers.forEach((num) => {
+  if (num % 2 === 0) {
+    evenNumbersList.push(num);
+  }
+});
+```
+
+## 🔍 로직 패턴 검증 체크리스트
+
+- [ ] if-else 문을 사용했는가?
+- [ ] filter 메서드를 사용하지 않았는가?
+- [ ] for loop를 사용했는가?
+- [ ] 조건문 문법이 올바른가?
+- [ ] 배열 접근이 안전한가?
+
+## 💡 올바른 로직 패턴 작성 팁
+
+1. **기본적인 for loop 사용**: `for (let i = 0; i < array.length; i++)`
+2. **명확한 조건문**: `if (condition) { ... } else { ... }`
+3. **안전한 배열 접근**: 인덱스 범위 확인
+4. **가독성 높은 코드**: 적절한 들여쓰기와 주석
+
+## 🎯 학습 목표
+
+- 기본적인 조건문과 반복문 패턴 이해
+- 고차 함수 대신 기본적인 제어 구조 사용
+- 코드의 가독성과 유지보수성 향상
+- 팀 코딩 컨벤션 준수
